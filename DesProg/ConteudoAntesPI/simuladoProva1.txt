@@ -1,0 +1,295 @@
+Resposta 1
+----------
+
+* Escreva sua saída aqui, no formato da Aula 2. *
+
+int mirror(int n) {
+    if (n == 1) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = mirror(n - 2) + 1;
+    printf("} %d\n", r);
+    return r;
+}
+
+mirror(11)
+
+m(11) 11 {
+// r = (m(9) = 5) + 1
+    m(9) 9 {
+    // r = (m(7) = 4) + 1
+        m(7) 7 {
+        // r = (m(5) = 3) + 1
+            m(5) 5 {
+            // r = (m(3) = 2) + 1
+                m(3) 3 {
+                // r = (m(1) = 1) + 1
+                    m(1) b: 1
+                } 2
+            } 3
+        } 4
+    } 5
+} 6
+
+11 {
+    9 {
+        7 {
+            5 {
+                3 {
+                    b: 1
+                } 2
+            } 3
+        } 4
+    } 5
+} 6
+
+
+
+Resposta 2
+----------
+
+* Escreva sua saída aqui, no formato da Aula 2. *
+
+int view(int n) {
+    if (n == 1) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = view(n - 1) * view(n - 1) * 2;
+    printf("} %d\n", r);
+    return r;
+}
+
+view(4)
+
+v(4) 4 {
+// r = (v(3) = 8)*(v(3) = 8)*2
+    v(3) 3 {
+    // r = (v(2) = 2)*(v(2)=2)*2
+        v(2) 2 {
+        // r = (v(1) = 1)*(v(1)=1)*2
+            v(1) b: 1
+            v(1) b: 1
+        } 2
+        v(2) 2 {
+        // r = (v(1) = 1)*(v(1)=1)*2
+            v(1) b: 1
+            v(1) b: 1
+        } 2
+    } 8
+
+    v(3) 3 {
+    // r = (v(2) = 2)*(v(2)=2)*2
+        v(2) 2 {
+        // r = (v(1) = 1)*(v(1)=1)*2
+            v(1) b: 1
+            v(1) b: 1
+        } 2
+        v(2) 2 {
+        // r = (v(1) = 1)*(v(1)=1)*2
+            v(1) b: 1
+            v(1) b: 1
+        } 2
+    } 8
+} 128
+
+
+4 {
+    3 {
+        2 {
+            b: 1
+            b: 1
+        } 2
+        2 {
+            b: 1
+            b: 1
+        } 2
+    } 8
+
+    3 {
+        2 {
+            b: 1
+            b: 1
+        } 2
+        2 {
+            b: 1
+            b: 1
+        } 2
+    } 8
+} 128
+
+
+Resposta 3
+----------
+
+* Escreva sua saída aqui, no formato da Aula 2. *
+
+int rear(int n) {
+    if (n == 1) {
+        printf("b: 1\n");
+        return 1;
+    }
+    if (n == 2) {
+        printf("b: 2\n");
+        return 2;
+    }
+    printf("%d {\n", n);
+    int r = rear(n - 1) * rear(n - 2);
+    printf("} %d\n", r);
+    return r;
+}
+
+rear(5)
+
+r(5) 5 {
+// r = (r(4) = 4)*(r(3) = 2)
+    r(4) 4 {
+    // r = (r(3) = 2) * (r(2) = 2)
+        r(3) 3 {
+        // r = (r(2) = 2) * (r(1) = 1)
+            r(2) b: 2
+            r(1) b: 1
+        } 2
+
+        r(2) b: 2
+    } 4
+
+    r(3) 3 {
+    // r = (r(2) = 2) * (r(1) = 1)
+        r(2) b: 2
+        r(1) b: 1
+    } 2
+} 8
+
+5 {
+    4 {
+        3 {
+            b: 2
+            b: 1
+        } 2
+
+        b: 2
+    } 4
+
+    3 {
+        b: 2
+        b: 1
+    } 2
+} 8
+
+
+Resposta 4
+----------
+
+Escreva uma função recursiva que recebe um inteiro não-negativo n e devolve a soma dos dígitos de n.
+Por exemplo, se n = 843, devolve 8+4+3, ou seja, 15.
+
+Dicas
+
+Qual é o resultado de 843 / 10?
+Qual é o resultado de 843 % 10?
+
+int somadig(int n) {
+    /* Escreva seu código aqui. */
+    if (n < 10){
+        return n % 10;
+    }
+
+    return somadig(n/10) + n % 10;
+}
+
+s(843){
+// (s(84) = 12) + 3
+    s(84){
+    // (s(8) = 8) + 4
+        s(8){
+        // 8}
+    } 12
+} 15
+
+
+Resposta 5
+----------
+
+Escreva uma função recursiva que recebe:
+
+*um vetor de números com casas decimais;
+
+*dois inteiros, l e r, que representam respectivamente o índice inicial (inclusive) e o índice final (inclusive) de um intervalo desse vetor
+
+e simetriza os elementos do intervalo, ou seja:
+
+substitui os valores do primeiro e último pela média dos dois (por exemplo, se v[l] == 2 e v[r] == 3, então ambos os valores são substituídos por 2.5, que é 
+a média de 2 e 3);
+
+substitui os valores do segundo e penúltimo pela média dos dois;
+
+substitui os valores do terceiro e antepenúltimo pela média dos dois
+
+e assim em diante.
+
+
+
+
+void simetriza(double v[], int l, int r) {
+    /* Escreva seu código aqui. */
+    if (l >= r){
+        return;
+    }
+
+    double media;
+    media = (v[l] + v[r])/2;
+    v[l] = media;
+    v[r] = media;
+
+    simetriza(v, l+1, r-1);
+}
+
+v = {1.2, 2.4, 6.3, 4.5}
+
+s(v, 0, 3){
+    // media = (1.2+4.5)/2
+        s(v, 1, 2){
+        // media = (2.4+6.3)/2
+            s(v, 2, 1){
+
+            }
+        }v[1] == v[2] == 4,35
+} v[0] == v[3] == 2.85
+
+
+Resposta 6
+----------
+
+Escreva uma função recursiva que recebe
+
+um vetor de inteiros entre 0 e 9, ou seja, dígitos;
+
+um inteiro que representa o tamanho desse vetor
+
+e devolve o inteiro representado por esse vetor. Por exemplo, se recebeu o vetor [2, 4, 7], deve devolver o inteiro 247.
+
+
+
+
+int monta(int v[], int n) {
+    /* Escreva seu código aqui. */
+    if (n == 1){
+        return v[0];
+    }
+
+    return 10*monta(v, n-1) + v[n - 1];
+}
+
+m(v, 3){
+// 10*(m(v,2) = 24) + (v[2] = 7)
+    m(v,2){
+    // 10*(m(v,1) = 2) + (v[1] = 4)
+        m(v,1){
+        } (v[0] = 2)
+    } 24
+}247
+

@@ -1,0 +1,50 @@
+Quantidade de iterações do loop externo (x):
+-------------------------------------------
+Contador começa de 5 e aumenta em 4 enquanto for menor que n.
+
+Depois de x-1 iterações, a condição ainda vale.
+5 + 4(x-1) < n
+5 + 4x - 4 < n
+4x + 1 < n
+4x < n - 1
+
+Depois de x iterações, a condição não vale.
+5 + 4x >= n
+4x >= n - 5
+
+(n-5)/4 <= x < (n-1)/4
+
+Quantidade de iterações do loop interno (y):
+-------------------------------------------
+Contador começa de 2 e aumenta em 3 enquanto for menor que i.
+
+Depois de y-1 iterações, a condição ainda vale.
+2 + 3(y-1) < i
+2 + 3y - 3 < i
+3y - 1 < i
+3y < i + 1
+
+y < (i+1)/3
+
+Valor de i ao longo do loop externo:
+-----------------------------------
+i = 5, 9, 13, ..., 5 + 4(x-1)
+
+Limitante para as iterações de todas as execuções do loop interno:
+-----------------------------------------------------------------
+  ((5 + 1) / 3) + ((9 + 1) / 3) + ((13 + 1) / 3) + ... + ((5 + 4(x-1) + 1) / 3)
+= (6 / 3) + (10 / 3) + (14 / 3) + ... + ((5 + 4x - 4 + 1) / 3)
+= (6 / 3) + (10 / 3) + (14 / 3) + ... + ((4x + 2) / 3)
+= (6 + 10 + 14 + ... + (4x + 2)) / 3
+
+Numerador é soma de PA com:
+- primeiro elemento 6;
+- último elemento 4x+2;
+- número de elementos x.
+
+= (6 + 4x + 2) (x / 2) / 3
+= (4x + 8) (x / 2) / 3
+= (2x + 4) x / 3
+= (2x^2 + 4x) / 3
+
+Como (n-5)/4 <= x < (n-1)/4, podemos concluir que a complexidade é O(n^2).

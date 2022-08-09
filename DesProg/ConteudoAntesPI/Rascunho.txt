@@ -1,0 +1,528 @@
+int mirror(int n) {
+    if (n == 1) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = mirror(n - 2) + 1;
+    printf("} %d\n", r);
+    return r;
+}
+
+Saída mirror(11):
+
+11 {
+    9 {
+        7 {
+            5 {
+                3 {
+                    b: 1
+                } 2
+            } 3
+        } 4
+    } 5
+} 6
+
+
+
+
+--------------------------------------------------------------------------------
+
+
+int view(int n) {
+    if (n == 1) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = view(n - 1) * view(n - 1) * 2;
+    printf("} %d\n", r);
+    return r;
+}
+
+Saída view(4):
+
+4 {
+    3 {
+        2 {
+            b: 1
+            b: 1
+        } 2
+        2 {
+            b: 1
+            b: 1
+        } 2
+    } 8
+    3 {
+        2 {
+            b: 1
+            b: 1
+        } 2
+        2 {
+            b: 1
+            b: 1
+        } 2
+    } 8
+} 128
+
+
+-------------------------------------------------------------------------------------
+
+int rear(int n) {
+    if (n == 1) {
+        printf("b: 1\n");
+        return 1;
+    }
+    if (n == 2) {
+        printf("b: 2\n");
+        return 2;
+    }
+    printf("%d {\n", n);
+    int r = rear(n - 1) * rear(n - 2);
+    printf("} %d\n", r);
+    return r;
+}
+
+Saída rear(5):
+
+5 {
+    4 {
+        3 {
+            b: 2
+            b: 1
+        } 2
+        b: 2
+    } 4
+    3 {
+        b: 2
+        b: 1
+    } 2
+} 8
+
+
+--------------------------------------------------------------------------------------
+
+Escreva uma função recursiva que recebe um inteiro não-negativo n e devolve a soma dos dígitos de n.
+Por exemplo, se n = 843, devolve 8+4+3, ou seja, 15 .
+
+Dicas: 
+    *Qual é o resultado de 843 / 10?
+    *Qual é o resultado de 843 % 10?
+
+843 / 10 = 84 (,3 Não aparece, pois não fez o casting); Resto: 3
+84 / 10 = 8(,4); Resto = 4
+n = 8. Basta pegá-lo e somá-lo ao 4 e ao 3 (Menor que 10)
+
+Por que menor que 10?
+
+Vejamos se for 100 
+100/ 10 = 10. Resto: 0
+10/10 = 1. Resto 0. 
+1 Menor que 10. Retorna ele mesmo. 
+Então vai ser 1+0+0 = 1; 
+
+int somadig(int n) {
+    if (n < 10){
+        return n;
+    }
+    return somadig(n/10) + (n % 10);
+}
+
+----------------------------------------------------------------------------
+
+Escreva uma função recursiva que recebe:
+    *um vetor de números com casas decimais;
+    *dois inteiros, l e r, que representam respectivamente o índice inicial (inclusive) e o índice final (inclusive) de um intervalo desse vetor
+
+e simetriza os elementos do intervalo, ou seja:
+
+    *substitui os valores do primeiro e último pela média dos dois (por exemplo, se v[l] == 2 e v[r] == 3, então ambos os valores são substituídos por 2.5,
+    que é a média de 2 e 3);
+
+    *substitui os valores do segundo e penúltimo pela média dos dois;
+
+    *substitui os valores do terceiro e antepenúltimo pela média dos dois
+
+e assim em diante.
+
+void simetriza(double v[], int l, int r) {
+    if (l >= r){
+        return;
+    }
+
+    double media;
+    media = (v[l] + v[r])/(double) 2;
+    v[l] = media;
+    v[r] = media;
+    simetriza (v, l + 1, r - 1);
+}
+
+
+---------------------------------------------------------------------
+
+Escreva uma função recursiva que recebe
+
+*um vetor de inteiros entre 0 e 9, ou seja, dígitos;
+
+*um inteiro que representa o tamanho desse vetor
+
+e devolve o inteiro representado por esse vetor. Por exemplo, se recebeu o vetor [2, 4, 7], deve devolver o inteiro 247.
+
+int monta(int v[], int n){
+    if(n == 1){
+        return v[0];
+    }
+
+    return 10*monta(v, n-1) + v[n-1];
+}
+
+
+-------------------------------------------------------------------
+
+double potencia(double b, int e){
+    if (e == 0){
+        return 1.0;
+    } if (e > 0){
+        return potencia(b, e-1)*b;
+    } if (e < 0){
+        return potencia(b, e+1)*(1/b);
+    }
+}
+
+---------------------------------------------------------
+
+int conta_digitos(int n){
+    if (n < 10){
+        return 1;
+    }
+
+    return conta_digitos(n/10)+1;
+
+}
+
+-------------------------------------------------------
+
+{1,4,5}
+void cumulativo(int v[], int n){
+    if (n == 1){
+        return;
+    }
+
+    v[n-1] = v[n-1]+v[n-2];
+    cumulativo(v, n-1);
+}
+
+-------------------------------------------------------------
+
+{1, 2, 3, 4, 5, 6}
+
+r = 5
+l = 0
+m = 5/2 = 2
+
+int soma_r(int v[], int l, int r) {
+    if (l == r) {
+        return v[l]; // poderia ser v[r]
+    }
+    int m = (l + r) / 2;
+    return soma_r(v, l, m) + soma_r(v, m + 1, r);
+}
+
+int soma(int v[], int n) {
+    return soma_r(v, 0, n - 1);
+}
+
+-----------------------------------------------------------
+
+int soma(int v[], int n){
+    if (n == 0){
+        return 0; // admite vetor vazio.
+    }
+
+    return soma(v, n-1) + v[n-1];
+}
+
+-----------------------------------------------------------
+
+void incrementa(int v[], int l, int r){
+    if(r < l){
+        return; // não faz nada!
+    }
+
+    v[r]++;
+    incrementa(v, l, r-1);
+}
+-------------------------------------------------------
+
+int log2(int n){
+    if (n == 1){
+        return 0;
+    }
+
+    return log2(n/2) + 1;
+}
+
+--------------------------------------------------------
+
+int simetrico(int v[], int l, int r){
+    if (l >= r){
+        return 1;
+    }
+
+    return simetrico(v, l+1, r-1) && (v[l] == v[r]);
+}
+
+
+-----------------------------------------------------------------------
+
+
+int f(int n) {
+    if (n == 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = n * f(n - 1);
+    printf("} %d\n", r);
+    return r;
+}
+
+5 {
+    4 {
+        3 {
+            2 {
+                1 {
+                    b: 1
+                } 1
+            } 2
+        } 6
+    } 24
+} 120
+
+
+---------------------------------------------------
+
+int g(int n) {
+    if (n == 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = g(n - 1) + g(n - 1);
+    printf("} %d\n", r);
+    return r;
+}
+
+saída g(3)
+
+3 {
+    2 {
+        1 {
+            b: 1
+            b: 1 
+        } 2           
+        1 {
+            b: 1
+            b: 1 
+        } 2  
+    } 4
+    2 {
+        1 {
+            b: 1
+            b: 1 
+        } 2           
+        1 {
+            b: 1
+            b: 1 
+        } 2  
+    } 4
+} 8
+
+------------------------------------------------------------
+
+int h(int n) {
+    if (n <= 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = h(n - 1) + h(n - 2);
+    printf("} %d\n", r);
+    return r;
+}
+
+4 {
+    3 {
+        2 {
+            1 {
+                b: 1
+                b: 1
+            } 2
+            b: 1
+        } 3
+        1 {
+            b: 1
+            b: 1
+        } 2
+    } 5
+    2 {
+        1 {
+            b: 1
+            b: 1
+        } 2
+        b: 1
+    } 3
+} 8
+
+
+---------------------------------------------------
+
+int bin(int n) {
+    if (n == 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = 2 * bin(n - 1);
+    printf("} %d\n", r);
+    return r;
+}
+
+bin(5)
+
+5 {
+    4 {
+        3 {
+            2 {
+                1 {
+                    b: 1
+                } 2
+            } 4
+        } 8
+    } 16
+} 32
+
+
+---------------------------------------------
+
+
+int rec(int n) {
+    if (n == 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = rec(n / 2) + rec(n / 2);
+    printf("} %d\n", r);
+    return r;
+}
+
+4 {
+    2 {
+        1 {
+            b: 1
+            b: 1
+        } 2
+        1 {
+            b: 1
+            b: 1
+        } 2
+    } 4
+    2 {
+        1 {
+            b: 1
+            b: 1
+        } 2
+        1 {
+            b: 1
+            b: 1
+        } 2
+    } 4
+} 8
+
+---------------------------------------------------
+
+int fib(int n) {
+    if (n <= 1) {
+        printf("b: %d\n", n);
+        return n;
+    }
+    printf("%d {\n", n);
+    int r = fib(n - 2) + fib(n - 1);
+    printf("} %d\n", r);
+    return r;
+}
+
+5 {
+    3 {
+        b: 1
+        2 {
+            b: 0
+            b: 1
+        } 1
+    } 2
+    4 {
+        2 {
+            b: 0
+            b: 1
+        } 1
+        3 {
+            b: 1
+            2 {
+                b: 0
+                b: 1
+            } 1
+        } 2
+    } 3
+} 5
+
+-------------------------------------------------------
+
+
+
+6) Escreva uma função recursiva que recebe
+
+    *um vetor de inteiros entre 0 e 9, ou seja, dígitos;
+
+    *um inteiro que representa o tamanho desse vetor
+
+e devolve o inteiro representado por esse vetor. Por exemplo, se recebeu o vetor [2, 4, 7], deve devolver o inteiro 247.
+
+int cria_numero(int v[], int n){
+    if (n == 1){
+        return v[0];
+    }
+
+    return cria_numero(v, n-1)*10 + v[n-1];
+}
+
+--------------------------------------------------------
+
+5) Escreva uma função recursiva que recebe:
+
+    *um vetor de números com casas decimais;
+
+    *dois inteiros, l e r, que representam respectivamente o índice inicial (inclusive) e o índice final (inclusive) de um intervalo desse vetor
+
+e simetriza os elementos do intervalo, ou seja:
+
+    *substitui os valores do primeiro e último pela média dos dois (por exemplo, se v[l] == 2 e v[r] == 3, então ambos os valores são substituídos por 2.5, 
+    que é a média de 2 e 3);
+
+    *substitui os valores do segundo e penúltimo pela média dos dois;
+
+    *substitui os valores do terceiro e antepenúltimo pela média dos dois
+
+e assim em diante.
+
+void simetriza(double v[], int l, int r){
+    if (l >= r){
+        return;
+    }
+
+    double media = (v[l] + v[r])/(double) 2;
+    v[l] = media;
+    v[r] = media;
+
+    simetriza(v, l+1, r-1);
+}

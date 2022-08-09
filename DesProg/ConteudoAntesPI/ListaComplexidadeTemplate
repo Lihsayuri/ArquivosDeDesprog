@@ -1,0 +1,71 @@
+void questao11(int n) {
+    for (int i = 2; i < n; i *= 3) {
+        for (int j = i; j > 5; j /= 4) {
+            printf("questao11\n");
+        }
+    }
+}
+
+Quantidade de iterações do loop externo (x):
+-------------------------------------------
+Contador começa de 2 e multiplica por 3 enquanto for menor que n. (i = 2*(3)^k)
+
+Depois de x-1 iterações, a condição ainda vale:
+2 * 3^(x-1) < n
+3^(x-1) < n/2
+log3(3^x-1) < log3(n/2)
+x - 1 < log3(n/2)
+x < log3(n/2) + 1
+
+
+Depois de x iterações, a condição não vale.
+2 * 3^x >= n
+3^x >= n/2
+log3(3^x) >= log3(n/2)
+x >= log3(n/2)
+
+
+log3(n/2) <= x < log3(n/2)+1
+
+
+Quantidade de iterações do loop interno (y):
+-------------------------------------------
+Contador começa de i e divide em 4 enquanto for maior que 5 (j = i/(4 ^ k)).
+
+Depois de y-1 iterações, a condição ainda vale.
+
+i/(4^(y - 1)) > 5
+i > 4^(y-1) * 5
+i/5 > 4^(y-1)
+log4(i/5) > log4(4^(y-1))
+log4(i/5) > y - 1
+log4(i/5) + 1 > y
+y < log4(i/5) + 1 
+
+
+Valor de i ao longo do loop externo:
+-----------------------------------
+i = 2, 6, 18, ..., 2 * 3^(x-1)
+
+
+Limitante para as iterações de todas as execuções do loop interno:
+-----------------------------------------------------------------
+(log4(2 / 5) + 1) + (log4(6 / 5) + 1) + (log4(18 / 5) + 1) + ... + (log4(2 * 3^(x-1) / 5) + 1)
+= (log4(2) - log4(5) + 1) + (log4(6) - log4(5) + 1) + (log4(18) - log4(5) + 1) + ... + (log4(2 * 3^(x-1)) - log4(5) + 1)
+= (log4(2 * 3^0) - log4(5) + 1) + (log4(2 * 3^1) - log4(5) + 1) + (log4(2 * 3^2) - log4(5) + 1) + ... + (log4(2 * 3^(x-1)) - log4(5) + 1)
+= (log4(3^0) + log4(2) - log4(5) + 1) + (log4(3^1) + log4(2) - log4(5) + 1) + (log4(3^2) + log4(2) - log4(5) + 1) + ... + (log4(3^(x-1)) + log4(2) - log4(5) + 1)
+= (0 log4(3) + log4(2) - log4(5) + 1) + (1 log4(3) + log4(2) - log4(5) + 1) + (2 log4(3) + log4(2) - log4(5) + 1) + ... + ((x-1) log4(3) + log4(2) - log4(5) + 1)
+= (0 log4(3) + 1 log4(3) + 2 log4(3) + ... + (x-1) log4(3)) + (log4(2) + log4(2) + log4(2) + ... + log4(2)) - (log4(5) + log4(5) + log4(5) + ... + log4(5)) + (1 + 1 + 1 + ... + 1)
+= (0 log4(3) + 1 log4(3) + 2 log4(3) + ... + (x-1) log4(3)) + xlog4(2) - xlog4(5) + x
+= (0 + 1 + 2 + ... + (x-1)) log4(3) + xlog4(2) - xlog4(5) + x
+
+Primeiro parênteses é soma de PA com:
+- primeiro elemento 0;
+- último elemento x-1;
+- número de elementos x.
+
+= (0 + x - 1) (x / 2) log4(3) + xlog4(2) - xlog4(5) + x
+= (x - 1) (x / 2) log4(3) + xlog4(2) - xlog4(5) + x
+= ((x^2 - x) / 2) log4(3) + xlog4(2) - xlog4(5) + x
+
+Como log3(n/2) <= x < log3(n/2)+1, podemos concluir que a complexidade é O((log n)^2).

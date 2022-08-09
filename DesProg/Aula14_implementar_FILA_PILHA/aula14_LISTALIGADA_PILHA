@@ -1,0 +1,102 @@
+#include <stdlib.h>
+
+struct _node {
+    int value;
+    struct _node *next;
+};
+
+typedef struct _node node;
+
+typedef struct _stack_int {
+    node *top;
+} stack_int;
+
+stack_int *stack_int_new() {
+    stack_int *s = malloc(sizeof(stack_int));
+    s->top = NULL;
+    return s;
+}
+
+
+void stack_int_delete(stack_int **_s) {
+    stack_int *s = *_s;
+    node *n = s->top;
+    while (n != NULL) {
+        node *next = n->next; // primeiro fazemos um "backup" do next
+        free(n);              // aí estamos livres para liberar o n
+        n = next;             // e usamos o "backup" para "andar"
+    }
+    free(s);
+    *_s = NULL;
+}
+
+int stack_int_empty(stack_int *s) {
+    return s->top == NULL;
+}
+
+void stack_int_push(stack_int *s, int value) {
+    node *n = malloc(sizeof(node));
+    n->value = value;
+    n->next = s->top;
+    s->top = n;
+}
+
+int stack_int_pop(stack_int *s) {
+    node *n = s->top;
+    s->top = n->next;
+    int value = n->value;
+    free(n);
+    return value;
+}
+
+
+int stack_int_genpop(stack_int *s, int index){
+    node *n;
+    int size = 0;
+
+    for (n = s->top; n != NULL; n = n->next){
+        size++;
+    }
+
+    node *p = NULL;
+    node *n = s->top;
+
+    for (int i = 0; i < size - index - 1; i++){
+        p = n;
+        n = n->next;
+    }
+
+    if (p != NULL){
+        p->next = n->next; // se p é NULL e n não é NULL, é porque queremos remover o top;
+    } else {
+        s->top = n->next;
+    }
+
+    int value = n->value;
+    free(n);
+    return value;
+}
+
+
+
+void stack_int_push(stack_int *s, int value, int index){
+    node *p = NULL;
+    node *n = s->top;
+
+    for (int i = 0; i < index; i++){
+        p = n;
+        n = n->next;
+    }
+
+    n = malloc(sizeof(node));
+    n->value = value;
+
+    if (p != NULL){
+        n->next = p->next; // se p é NULL e n não é NULL, é porque queremos remover o top;
+        p->next = n;
+    } else {
+        n->next = s->top; // o next de quem vou inserir é o antigo topo;
+        s->top = n; // novo topo é qyem vou inserir;
+    }
+
+}

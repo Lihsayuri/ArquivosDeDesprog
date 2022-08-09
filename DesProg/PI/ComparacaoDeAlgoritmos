@@ -1,0 +1,74 @@
+= (0 log4(3) + 1 log4(3) + 2 log4(3) + ... + (x-1) log4(3)) + (log4(2) + log4(2) + log4(2) + ... + log4(2)) - (log4(5) + log4(5) + log4(5) + ... + log4(5)) + (1 + 1 + 1 + ... + 1)
+Como a empresa de logística recebe e cadastra milhares de produtos alimentícios ao longo de um dia, vamos especificamente considerar a recomendação para vetores grandes. Como é importante que a velocidade média seja alta, vamos considerar importante a complexidade de tempo.
+= (0 log4(3) + 1 log4(3) + 2 log4(3) + ... + (x-1) log4(3)) + (log4(2) + log4(2) + log4(2) + ... + log4(2)) - (log4(5) + log4(5) + log4(5) + ... + log4(5)) + (1 + 1 + 1 + ... + 1)
+
+Entretanto, como as datas de vencimento são totalmente imprevisíveis e não há uma ordem específica, não podemos considerar a recomendação de tempo na prática, dessa forma, iremos considerar a recomendação de tempo na teoria para selecionar o algoritmo com a velocidade média mais alta. 
+
+Por fim, como a empresa preza por eficiência e consistência, o algoritmo a ser escolhido não pode apresentar um comportamente de complexidade de tempo na teoria muito diferente para o pior, médio e melhor caso. 
+
+Segundo essa recomendação, o algoritmo mais indicado é o MERGE SORT. 
+
+O algoritmo não é o melhor em relação a complexidade de memória adicional, mas o departamento financeiro tem um bom orçamento reservado para o setor de TI e não se importaria de investir em aumento de memória caso seja necessário. Além disso, é um algoritmo estável, embora isso também não tenha sido exigido pelo contexto. 
+
+
+---------------------------------------------------------------------------------------------
+
+Como o departamento de RH fará triagem com centenas de candidatos,
+vamos especificamente considerar a recomendação para vetores grandes. Como a velocidade é importante, já que o processo de ordenação das notas será repetido outras vezes, vamos considerar a recomendação de tempo na prática.
+
+Por fim, como as primeiras submissões das provas tendem a ter as maiores notas e as últimas submissões tendem a ter as piores notas, o comportamento do vetor tende a ser quase ou totalmente decrescente, assim, podemos invertê-o para obter um vetor quase ou totalmente crescente. 
+
+Segundo essa recomendação, o algoritmo mais indicado é o INSERTION SORT.
+
+O algoritmo é uma das melhores opções em relação a complexidade de memória adicional, além de ser estável, embora esses fatores não tenham sido exigidos pelo contexto
+
+----------------------------------------------------------------------------------------------
+
+
+Como os professores precisam ordenar os milhares de alunos da faculdade pelo seu CR, 
+vamos especificamente considerar a recomendação para vetores grandes. Como a velocidade é importante para evitar picos de lentidão, vamos considerar a recomendação de tempo na prática
+
+Por fim, como o ponto de partida da ordenação é o número de matrícula e múltiplos estudos sugerem que não existe nenhum tipo de relação entre o número de matrícula e o CR, vamos considerar a recomendação para vetores sem ordem aparente.
+
+Segundo essa recomendação, o algoritmo mais indicado é o QUICK SORT.
+
+O algoritmo não é o melhor em relação a complexidade de memória adicional, mas
+não chega a exigir memória diretamente proporcional ao tamanho do vetor. Além disso não é estável. Entretanto não foram exigidos critérios para complexodade de memória adicional e nem para estabilidade. 
+
+-----------------------------------------------------------------------------------
+
+Como um abrigo recebe entre 30 e 50 pedidos de adição por dia para os animais mais fofinhos que viralizam na internet, vamos considerar a recomendação para vetores pequenos. Como a velocidade é importante, vamos considerar a recomendação de tempo na prática.  
+
+Como os voluntários precisam ordenar os candidatos por diferentes critérios e às vezes múltiplos critérios ao mesmo tempo e nada sugere que a ordem pré-existente seja quase ou totalmente descrescente, o algoritmo mais indicado é o INSERTION SORT.
+
+Como os computadores do abrigo são um pouco velhinhos, é exigido que a ordenação não consuma muita memória, e o INSERTION tem um baixo consumo de memória adicional.
+
+
+Além disso, o algoritmo é estável, o que também foi exigido pelo contexto por conta da planilha. 
+
+----------------------------------------------------------------------------------
+
+Como uma fundação recebe centenas de pedidos de bolsa de estudos por semana, vamos considerar a recomendação para vetores grandes. Como a velocidade é importante, vamos considerar a recomendação de tempo na prática.
+
+Como nada em específico foi mencionada em relação à ordem inicial das notas, vamos supor que não há ordem aparente. Nesse caso, o QUICK e o MERGE são os melhores.
+
+Como os pedidos chegam ordenados por idade e a idade pode ser um critério
+de desempate, é importante que o algoritmo seja estável. Portanto, dentre
+os dois, só podemos escolher o MERGE SORT.
+
+Ele é o pior em consumo de memória adicional, mas há uma boa quantidade
+disponível.
+
+-----------------------------------------------------------------------------------------
+
+Como o dispositivo embarcado registra a temperatura uma vez por hora ao longo de um dia e isso constitui um vetor de 24 elementos, camos considerar a recomendação para vetores pequenos. 
+
+Como o dispositivo tem hardware limitado, iremos considerar importante a complexidade de memória adicional.
+
+Como as temperaturas a serem ordenadas acabam tendo uma tendência mais ou menos decrescente, podemos inverter o vetor para ordem crescente.
+
+Segundo essa recomendação, o algoritmo mais recomendado é o INSERTION. 
+
+Além disso, o INSERTION é estável, embora esse critério não tenha sido exigido pelo contexto. 
+
+

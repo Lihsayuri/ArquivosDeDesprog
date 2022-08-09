@@ -1,0 +1,35 @@
+Passo A:
+
+/
+| 1             se n <= 5;
+f(n) = <
+| f(n-4) + 1    se n > 5.
+ \
+
+
+Passo B:
+
+insert drawio
+
+
+Passo C:
+
+Tamanho n diminui em 4 a cada andar enquanto for maior que 5.
+No antepenúltimo andar (h-2), ainda não chegamos na base.
+n - 4(h-2) > 5
+n - 4h + 8 > 5
+n - 4h + 3 > 0
+n + 3 > 4h
+h < (n+3)/4
+
+
+Passo D:
+
+Ao longo dos andares, temos
+  (1 + 1 + 1 + ... + 1) + 1
+= (h - 1) + 1.
+
+
+Passo E:
+
+Como h < (n+3)/4, a complexidade é O(n).

@@ -1,0 +1,426 @@
+Exercício 1:
+
+void bar() {
+    printf("X\n");
+}
+
+void foo() {
+    printf("A\n");
+    bar();
+    printf("B\n");
+}
+
+int main() { // função principal
+    printf("1\n");
+    foo();
+    printf("2\n");
+    return 0;
+}
+
+
+Saída:
+
+1
+    A
+        X
+    B
+2
+
+-----------------------------------------------------
+
+Exercício 2
+
+void bar() {
+    printf("X\n");
+}
+
+void foo() {
+    printf("A\n");
+    bar();
+    printf("B\n");
+    bar();
+    printf("C\n");
+}
+
+int main() {
+    printf("1\n");
+    foo();
+    printf("2\n");
+    bar();
+    printf("3\n");
+    foo();
+    printf("4\n");
+    return 0;
+}
+
+Saída:
+
+1
+    A
+        X
+    B
+        X
+    C
+2
+    X
+3
+    A
+        X
+    B
+        X
+    C
+4
+
+------------------------------------------------------
+
+Exercício 3 [Exemplo de recursão infinita]
+
+void wtf() {
+    printf("comecou\n");
+    wtf();
+    printf("terminou\n");
+}
+
+Saída:
+
+comecou
+    comecou
+        comecou
+            comecou
+                comecou
+                ...
+
+------------------------------------------------------
+
+Exercício 4:
+
+void incrementa(int n) {
+    printf("comecou %d\n", n);
+    incrementa(n + 1);
+    printf("terminou %d\n", n);
+}
+
+Saída de incrementa(1):
+
+comecou 1
+    comecou 2
+        comecou 3
+            comecou 4 ... 
+
+----------------------------------------------------------
+
+Exercício 5:
+
+void incrementa(int n) {
+    printf("comecou %d\n", n);
+    if (n < 3) {
+        incrementa(n + 1);
+    }
+    printf("terminou %d\n", n);
+}
+
+Saída:
+
+comecou 1 (chamou comecou uma vez)
+    comecou 2 (chamou comecou outra vez)
+        comecou 3    |  Entenda que os dois estão dentro do comecou 2, que ainda não terminou
+        terminou 3   |
+    terminou 2
+terminou 1
+
+
+----------------------------------------------------------
+
+Exercício 6:
+
+void decrementa(int n) {
+    printf("comecou %d\n", n);
+    decrementa(n - 1);
+    printf("terminou %d\n", n);
+}
+
+Saída para decrementa(2):
+
+d(2) comecou 2
+    d(1) comecou 1
+        d(0) comecou 0
+            d(-1) comecou -1 ... 
+
+
+---------------------------------------------------------------
+
+Exercício 7:
+
+void decrementa(int n) {
+    printf("comecou %d\n", n);
+    if (n > 0){
+        decrementa(n - 1);
+    }
+    printf("terminou %d\n", n);
+}
+
+Saída decrementa(2):
+
+d(2) comecou 2
+    d(1) comecou 1
+        d(0) comecou 0
+             terminou 0
+        terminou 1
+    terminou 2
+
+
+--------------------------------------------------
+
+Exercício 8:
+
+void decrementa(int n) {
+    if (n > 0) {
+        decrementa(n - 1);
+    }
+    printf("terminou %d\n", n);
+}
+
+Saída decrementa(2):
+
+d(2)
+    d(1)
+        d(0)
+        terminou 0
+    terminou 1
+terminou 2
+
+--------------------------------------------------
+
+Exercício 9:
+
+void decrementa(int n) {
+    printf("comecou %d\n", n);
+    if (n > 0) {
+        decrementa(n - 1);
+    }
+}
+
+Saída decrementa(2):
+
+d(2) comecou 2
+    d(1) comecou 1
+        d(0) comecou 0
+
+-----------------------------------------------------------
+
+Exercício 10 [Função recursiva que devolve valor]:
+
+int f(int n) {
+    if (n == 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = n * f(n - 1);
+    printf("} %d\n", r);
+    return r;
+}
+
+Saída f(5):
+
+Primeiro jeito para compreender:
+
+f(5) 5 {
+// r = 5*( f(4) = 24)
+    f(4) 4 {
+    // r = 4*( f(3) = 6)
+        f(3) 3{
+        // r = 3* ( f(2) = 2)
+            f(2) 2{
+            // r = 2*( f(1) = 1)
+                f(1) 1{
+                // r = 1 * ( f(0) = 1)
+                    f(0) b: 1
+                } 1
+            } 2
+        } 6
+    } 24
+} 120
+
+Jeito clean:
+
+f(5) 5 {
+    f(4) 4 {
+        f(3) 3{
+            f(2) 2{
+                f(1) 1{
+                    f(0) b: 1
+                } 1
+            } 2
+        } 6
+    } 24
+} 120
+
+
+----------------------------------------------------------------------------------------
+
+Exercício 11 [Função com múltiplas chamadas recursivas]:
+
+int g(int n) {
+    if (n == 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = g(n - 1) + g(n - 1);
+    printf("} %d\n", r);
+    return r;
+}
+
+Esse código:
+int r = g(n - 1) + g(n - 1);
+
+É equivalente a esse:
+int r;
+r = g(n - 1);
+r = r + g(n - 1);
+
+
+Saída g(3):
+
+g(3) 3 {
+// r = (g(2) = 4) + (g(2) = 4)
+    g(2) 2 {
+    // r = (g(1) = 2) + (g(1) = 2)
+        g(1) 1 {
+        // r = (g(0) = 1) + (g(0) = 1)
+            g(0) b: 1
+            b : 1
+        } 2
+        g(1) 1 {
+        // r = (g(0) = 1) + (g(0) = 1)
+            g(0) b: 1
+            b : 1
+        } 2
+    }4
+    g(2) 2 {
+    // r = (g(1) = 2) + (g(1) = 2)
+        g(1) 1 {
+        // r = (g(0) = 1) + (g(0) = 1)
+            g(0) b: 1
+            b : 1
+        } 2
+        g(1) 1 {
+        // r = (g(0) = 1) + (g(0) = 1)
+            g(0) b: 1
+            b : 1
+        } 2
+    }4
+} 8
+
+Mais clean:
+
+(3) 3 {
+    g(2) 2 {
+        g(1) 1 {
+            g(0) b: 1
+            b : 1
+        } 2
+        g(1) 1 {
+            g(0) b: 1
+            b : 1
+        } 2
+    }4
+    g(2) 2 {
+        g(1) 1 {
+            g(0) b: 1
+            b : 1
+        } 2
+        g(1) 1 {
+            g(0) b: 1
+            b : 1
+        } 2
+    }4
+} 8
+
+------------------------------------------------------------------------
+
+
+Exercício 12 [Função recursiva assimétrica]:
+
+int h(int n) {
+    if (n <= 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = h(n - 1) + h(n - 2);
+    printf("} %d\n", r);
+    return r;
+}
+
+Saída h(4):
+
+h(4) 4 {
+// r = (h(3) = 5) + (h(2) = 3)
+    h(3) 3{
+    // r = (h(2) = 3) + (h(1) = 2)
+        h(2) 2{
+        // r = (h(1) = 2) + (h(0) = 1)
+            h(1) 1 {
+            // r = (h(0) = 1) + (h(-1) = 1)
+                h(0) b : 1  
+                h(-1) b : 1
+            } 2
+            
+            h(0) b : 1  
+        } 3
+
+        h(1) 1 {
+            // r = (h(0) = 1) + (h(-1) = 1)
+                h(0) b : 1  
+                h(-1) b : 1
+            } 2
+    }5
+
+    h(2) 2{
+        // r = (h(1) = 2) + (h(0) = 1)
+            h(1) 1 {
+            // r = (h(0) = 1) + (h(-1) = 1)
+                h(0) b : 1  
+                h(-1) b : 1
+            } 2
+            
+            h(0) b : 1  
+        } 3
+} 8
+    
+
+Mais clean:
+
+
+h(4) 4 {
+    h(3) 3{
+        h(2) 2{
+            h(1) 1 {
+                h(0) b : 1  
+                h(-1) b : 1
+            } 2
+            
+            h(0) b : 1  
+        } 3
+
+        h(1) 1 {
+                h(0) b : 1  
+                h(-1) b : 1
+            } 2
+    }5
+
+    h(2) 2{
+            h(1) 1 {
+                h(0) b : 1  
+                h(-1) b : 1
+            } 2
+            
+            h(0) b : 1  
+        } 3
+} 8
+
+
+
+
