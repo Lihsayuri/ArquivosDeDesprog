@@ -1,0 +1,252 @@
+Questão 1:
+
+int bin(int n) {
+    if (n == 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = 2 * bin(n - 1);
+    printf("} %d\n", r);
+    return r;
+}
+
+Saída bin(5)
+
+b(5) 5 {
+// r = 2*( b(4) = 16)
+    b(4) 4 {
+    // r = 2*( b(3) = 8)
+        b(3) 3 {
+        // r = 2*( b(2) = 4)
+            b(2) 2 {
+            // r = 2* ( b(1) = 2)
+                b(1) 1 {
+                // r = 2* ( b(0) = 1)
+                    b(0) b:1
+                } 2
+            } 4
+        } 8 
+    } 16
+}32
+
+Mais clean:
+
+b(5) 5 {
+    b(4) 4 {
+        b(3) 3 {
+            b(2) 2 {
+                b(1) 1 {
+                    b(0) b:1
+                } 2
+            } 4
+        } 8 
+    } 16
+}32
+
+-------------------------------------------------------------------
+
+Questão 2:
+
+int rec(int n) {
+    if (n == 0) {
+        printf("b: 1\n");
+        return 1;
+    }
+    printf("%d {\n", n);
+    int r = rec(n / 2) + rec(n / 2);
+    printf("} %d\n", r);
+    return r;
+}
+
+Saída rec(4)
+
+r(4) 4 {
+// r = ( r(2) = 4) + ( r(2) = 4)
+    r(2) 2 {
+    // r = ( r(1) = 2) + ( r (1) = 2)
+        r(1) 1{
+        // r = (r(0) = 1) + (r(0) = 1)
+            r(0) b:1
+            r(0) b:1
+        } 2
+        r(1) 1{
+        // r = (r(0) = 1) + (r(0) = 1)
+            r(0) b:1
+            r(0) b:1
+        } 2
+    } 4
+
+    r(2) 2 {
+    // r = ( r(1) = 2) + ( r (1) = 2)
+        r(1) 1{
+        // r = (r(0) = 1) + (r(0) = 1)
+            r(0) b:1
+            r(0) b:1
+        } 2
+        r(1) 1{
+        // r = (r(0) = 1) + (r(0) = 1)
+            r(0) b:1
+            r(0) b:1
+        } 2
+    } 4
+}8
+
+
+Mais clean
+
+r(4) 4 {
+    r(2) 2 {
+        r(1) 1{
+            r(0) b:1
+            r(0) b:1
+        } 2
+        r(1) 1{
+            r(0) b:1
+            r(0) b:1
+        } 2
+    } 4
+
+    r(2) 2 {
+        r(1) 1{
+            r(0) b:1
+            r(0) b:1
+        } 2
+        r(1) 1{
+            r(0) b:1
+            r(0) b:1
+        } 2
+    } 4
+}8
+
+--------------------------------------------------------------------
+
+Questão 3:
+
+int fib(int n) {
+    if (n <= 1) {
+        printf("b: %d\n", n);
+        return n;
+    }
+    printf("%d {\n", n);
+    int r = fib(n - 2) + fib(n - 1);
+    printf("} %d\n", r);
+    return r;
+}
+
+Saída fib(5)
+
+f(5) 5 {
+// r = (f(3) = 2) + (f(4) = 3)
+    f(3) 3 {
+    // r = (f(1) = 1) + (f(2) = 1)
+        f(1) b: 1
+
+        f(2) 2 {
+        // r = (f(0) = 0) + (f(1) = 1)
+            f(0) b: 0
+
+            f(1) b: 1
+        } 1
+    } 2
+
+    f(4) 4 { 
+    // r = (f(2) = 1) + (f(3) = 2)
+        f(2) 2 {
+        // r = (f(0) = 0) + (f(1) = 1)
+            f(0) b: 0
+
+            f(1) b: 1
+        } 1
+
+        f(3) 3 {
+        // r = (f(1) = 1) + (f(2) = 1)
+            f(1) b: 1
+
+            f(2) 2 {
+            // r = (f(0) = 0) + (f(1) = 1)
+                f(0) b: 0
+
+                f(1) b: 1
+            } 1
+        } 2
+    } 3
+} 5
+
+
+Mais clean:
+
+
+f(5) 5 {
+    f(3) 3 {
+        f(1) b: 1
+        f(2) 2 {
+            f(0) b: 0
+            f(1) b: 1
+        } 1
+    } 2
+
+    f(4) 4 { 
+        f(2) 2 {
+            f(0) b: 0
+            f(1) b: 1
+        } 1
+
+        f(3) 3 {
+            f(1) b: 1
+            f(2) 2 {
+                f(0) b: 0
+                f(1) b: 1
+            } 1
+        } 2
+    } 3
+} 5
+
+-----------------------------------------------------------------------
+
+DESAFIOS
+
+Desafio 1:
+
+void primeira(int n) {
+    if (n == 1) {
+        return;
+    }
+    primeira(n - 2);
+}
+
+
+Essa função entra em recursão infinita para algumas entradas, mas não entra para outras.
+* Quais são as entradas que causam recursão infinita? Por quê? Desconsidere entradas menores que 1, pois estamos supondo que elas são positivas.
+
+As entradas em que seja par, pois quando chega em 2, ao invés de ficar 1, será 0 e terá passado a condição que tenta evitar o loop e irá continuar para
+números negativos. 
+
+* Como você poderia impedir a recursão infinita, mas mantendo a redução n-2?
+
+Para impedir essa recursão infinita, mas mantendo a redução n-2, podemos substituir a condição por n <= 1, se o caso 0 deve ser considerado,
+
+ou n <= 2, se o caso 0 não pode ser considerado.
+
+
+Desafio 2:
+
+void segunda(int n) {
+    printf("segunda");
+    if (n == 1) {
+        return;
+    }
+    segunda(n / 2);
+}
+
+Dado um inteiro positivo x, a quantidade de impressões da chamada segunda(x) pode ser igual à quantidade de impressões da chamada segunda(x+1). Por quê?
+
+segunda(2):
+segunda
+
+segunda(3)
+segunda
+
+Pois a divisão não considera float, assim, quando não for um número par, ele irá pegar o resultado da divisão apenas do número inteiro, e
+isso faz com que o resultado de segunda(x) seja igual ao de segunda(x+1)
+

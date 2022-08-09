@@ -1,0 +1,331 @@
+Escreva uma função recursiva que recebe:
+
+um inteiro b;
+
+um inteiro não-negativo e;
+
+e devolve b^e.
+
+int pow(int b, int e){
+    if (e == 0){
+        return 1;
+    }
+
+    // devolver a potência de um número
+    return b*pow(b, e-1)
+    
+}
+
+Saída pow(2, 3)
+
+p(2,3){
+2*(p(2,2) = 4)
+    p(2,2){
+    2*( p(2,1) = 2)
+        p(2,1){
+        2*(p(2,0) = 1)
+            p(2,0){
+                1
+            }
+        }2
+    }4
+}8
+
+---------------------------------------------------------
+
+Escreva uma função recursiva que recebe:
+
+um vetor v de inteiros;
+
+um inteiro n que representa o tamanho de v;
+
+e devolve a soma dos elementos de v.
+
+int soma(int v[], int n){
+    if(n == 0){
+        return 0;
+    }
+
+    \\ devolver a soma de v[]
+    return v[n-1] + soma(v, n-1) // lembre que se o vetor tem 5 elementos, o máximo é v[4], pois começa em v[0]
+
+}
+
+int v[5] = {2,5,6,8,1};
+
+s(5){
+(v[4] = 1) + (s(4) = 21)
+    s(4){
+    (v[3] = 8) + (s(3) = 13)
+        s(3){
+        (v[2] = 6) + (s(2) = 7)
+            s(2){
+            (v[1] = 5) + (s(1) = 2)
+                s(1){
+                (v[0] = 2) + (s(0) = 0)
+                    s(0){
+                    } 0
+                } 2
+            } 7
+        }13
+    } 21
+} 22
+
+-----------------------------------------------------------------------------------
+
+
+Escreva uma função recursiva que recebe:
+
+um vetor v de inteiros;
+
+dois inteiros, l  e r, que representam respectivamente o índice inicial (inclusive) e o índice final (inclusive) de um intervalo de v;
+
+e soma 1 a todos os elementos desse intervalo (ou seja, não devolve nada).
+
+
+void incrementa(int v[], int l, int r){
+    //modificar os numeros do array somando 1 para cada v[l]
+    if (l > r){
+        return;
+    }
+
+    incrementa(v, l, r-1)
+    v[r]++ 
+}
+
+Saída (3) {7,3,1}
+
+f(3){
+f(v,0,2)
+    f(2){
+    f(v,0,1)
+        f(1){
+        f(v, 0, 0)
+            f(0){
+            f(v, 0, -1)
+            }
+        } f(0)++
+    } f(1) ++
+} f(2) ++ 
+
+
+----------------------------------------------------------------------
+
+Escreva uma função recursiva que recebe um inteiro positivo  que é uma potência de dois (a função não precisa verificar se ele é de
+fato uma potência de dois, você pode supor que isso é verdade) e devolve qual é o expoente dessa potência. Por exemplo:
+se recebe 1, deve devolver 0, pois 1 = 2^0 ;
+
+se recebe 2, deve devolver 1, pois 2 = 2^¹;
+
+se recebe 4, deve devolver 2, pois 4 = 2^²;
+
+e assim em diante.
+
+Passo 1 (feito): entenda o que a função recebe e o que deveria fazer.
+
+int log2(int n){
+    //recebe uma potência de 2 e tem que devolver o expoente
+    if (n == 1){
+        return 0;
+    }
+
+    return log2(n/2)+1
+}
+
+Saida para log2(8):
+
+l(8){
+// l(4) + 1
+    l(4){
+    // l(2) + 1
+        l(2){
+        // l(1) + 1
+            l(1){
+            }
+        } 1
+    } 2
+} 3
+
+--------------------------------------------------------------------
+
+
+Escreva uma função recursiva que recebe:
+
+um vetor v de inteiros;
+
+dois inteiros, l  e r, que representam respectivamente o índice inicial (inclusive) e o índice final (inclusive) de um intervalo de ;
+
+e devolve:
+
+* 1 se esse intervalo é simétrico (ver a definição abaixo);
+
+* 0 caso contrário.
+
+Dizemos que um intervalo é simétrico se:
+
+* o primeiro elemento é igual ao último;
+
+* o segundo elemento é igual ao penúltimo;
+
+* o terceiro elemento é igual ao antepenúltimo;
+
+e assim em diante.
+
+Passo 1: entenda o que a função recebe e o que deveria fazer.
+
+
+v{a,b,b,a}
+
+int simetrico(int v[], int l, int r){
+    // devolve 1 se v[0] == v[r-1]; v[1] == v[r-2]; v[2] == v[r-3]
+
+    if (l >=  r){
+        return 1; 
+    }
+
+    return  v[r] == v[l] && simetrico(v, l+1, r-1);
+}
+
+Saída:
+
+v(v, 0, 3){
+// (v[0] == v[3] = 1) && ( s(v, 1, 2) = 1)
+    s(v, 1, 2){
+    // (v[1] == v[2] = 1) && ( s(v, 2, 1) = 1)
+        s(v, 2, 1){
+        } 1
+    } 1
+} 1
+
+
+-------------------------------------------------------------------------------
+SIMULADO
+
+Questão 1
+
+Escreva uma função recursiva que recebe:
+
+* um número não-nulo b que não é necessariamente inteiro;
+
+* um inteiro e que pode ser negativo;
+
+e devolve b^e.
+
+Não precisa fazer passo a passo. Pode escrever apenas a resposta final.
+
+Dica 1: se um parâmetro pode ser negativo, o conceito de “menor parâmetro possível” ainda existe? Talvez sim… considere o módulo.
+
+Dica 2: considere a possibilidade de usar duas chamadas recursivas diferentes.
+
+double potencia(double b, int e){
+    if (e == 0){
+        return 1;
+    }
+    if (e > 0){
+        return potencia(b, e-1)*b;
+    } if (e < 0){
+        return potencia(b, -e-1)*(1/b);
+    }
+}
+
+--------------------------------------------------------------------
+
+Escreva uma função recursiva que recebe um inteiro n não negativo e devolve a quantidade de dígitos de n.
+
+Não precisa fazer passo a passo. Pode escrever apenas a resposta final.
+
+Dica 1: qual é a operação que, por exemplo, transforma o inteiro 483 no inteiro 48 e transforma o inteiro 48 no inteiro 4. Ou seja, qual é a operação que corta o último dígito?
+
+Dica 2: o comportamento da divisão de inteiros em C nem sempre é algo indesejado…
+
+
+
+
+int contaDigitos(n){
+    if (n >= 0 && n < 10){
+        return 1;
+    }
+    return contaDigitos(n/10)+1;
+}
+
+
+---------------------------------------------------------------------------------
+
+Escreva uma função recursiva que recebe:
+
+um vetor v de inteiros;
+
+um inteiro n que representa o tamanho de v;
+
+e transforma v (ou seja, modifica v e não devolve nada) em seu vetor cumulativo, ou seja,
+
+* v[0] depois da função é igual a v[0] antes da função;
+
+* v[1] depois da função é igual a v[0] + v[1] antes da função;
+
+* v[2] depois da função é igual a v[0] + v[1] + v[2] antes da função.
+
+Não precisa fazer passo a passo. Pode escrever apenas a resposta final.
+
+int v[3] = {2,6,4};
+
+void cumulativo (int v[], int n){
+    if (n == 1){
+        return;
+    }   
+
+    cumulativo(v, n-1)
+    v[n-1] = v[n-1] + v[n-2];
+}
+
+c(v,3){
+// c(v,2)
+    c(v,2){
+    // c(v,1)
+        c(v,1){
+        }
+    } v[1] = v[1] + v[0]
+}v[2] = v[2] + v[1]
+
+
+-------------------------------------------------------------------
+
+
+DESAFIOS
+
+Escreva uma função que recebe:
+
+
+um vetor v de inteiros;
+
+um inteiro n que representa o tamanho de v;
+
+e devolve a soma dos elementos de v usando duas chamadas recursivas.
+
+Dica: (1 + 2 + 3 + 4 + 5 + 6) = (1 + 2 + 3) + (4 + 5 + 6).
+
+
+int soma_r(int v[], int l, int r) {
+    if (l == r) {
+        return v[l]; // poderia ser v[r]
+    }
+    int m = (l + r) / 2;
+    return soma_r(v, l, m) + soma_r(v, m + 1, r);
+}
+
+int soma(int v[], int n) {
+    return soma_r(v, 0, n - 1);
+}
+
+---------------------------------------------------
+
+void hanoi(int n, char orig, char aux, char dest) {
+    if (n > 1) {
+        hanoi(n - 1, orig, dest, aux);
+    }
+    printf("mova o disco %d da torre %c para a torre %c\n", n, orig, dest);
+    if (n > 1) {
+        hanoi(n - 1, aux, orig, dest);
+    }
+}
+

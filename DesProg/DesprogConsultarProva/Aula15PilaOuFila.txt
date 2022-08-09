@@ -1,0 +1,204 @@
+Uma consultoria de infraestrutura de TI está estudando alternativas para implementar uma ﬁla de requisições feitas ao servidor. 
+Garantia de serviço é levada muito a sério nessa empresa, portanto essa ﬁla não pode “estourar” de jeito nenhum!
+
+Uma boa notícia é que um mesmo usuário do sistema não pode fazer duas requisições ao mesmo tempo: a anterior deve ser ter sido
+processada antes de ele poder fazer uma nova. Uma má notícia é que, em teoria, é possível que todos os usuários do sistema façam 
+requisições ao mesmo tempo. Em teoria, pois a verdadeira quantidade de requisições simultâneas é baixíssima na média.
+
+O que você usaria para implementar essa ﬁla? Um vetor estático, vetor dinâmico ou lista ligada? Além da tabela, leve em consideração
+o seguinte:
+
+* atingir o máximo de requisições é raro, mas com certeza acontece porque os admins fazem testes de stress regularmente;
+
+* o cliente não quer que memória ociosa ﬁque alocada por muito tempo.
+
+
+RespostaEu: 
+
+Se um mesmo usuário não pode fazer duas requisições ao mesmo tempo, sabemos o número máximo da fila, que é o número de usuários.
+Nesse caso, isso já garante que a fila de requisições não irá estourar, pois conhecemos o número máximo de requisições, e portanto, 
+o número máximo da fila.
+
+Além disso, foi exigido que não haja memória ociosa alocada por muito tempo, o que pode acontecer com o vetor estático, e, também com
+o vetor dinâmico. Ademais, como dito pelo enunciado, atingir o máximo de requisições é raro e a quantidade de requisições simultâneas é
+baixíssima na média . Nesse caso, consideramos a recomendação de memória na prática para tamanho média distante do tamanho máximo, e 
+temos que a lista ligada é a melhor opção.
+
+
+Ela garante que a memória ociosa fique alocada por pouco tempo, além de não estourar.
+
+Por fim, ela é a menos rápida, embora isso não tenha sido exigido pelo contexto.
+
+
+RespostaHashi:
+
+Como um mesmo usuário do sistema não pode fazer duas requisições ao mesmo
+tempo, o tamanho máximo que a estrutura pode atingir é conhecido, pois é
+igual ao número de usuários.
+
+Como o cliente não quer desperdício de memória e o tamanho máximo é conhecido,
+podemos usar a tabela de recomendação de memória na prática. Nessa tabela,
+a implementação mais recomendada é a LISTA LIGADA, pois sabemos que a
+quantidade de requisições simultâneas é baixíssima em média.
+
+Ela também oferece segurança contra estouro, embora isso não seja relevante
+visto que o tamanho máximo é conhecido.
+
+Por fim, ela não é a mais rápida na prática, mas isso não foi explicitamente
+exigido pelo cliente.
+
+-----------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+Uma startup voltada à integração de arte e tecnologia está desenvolvendo um novo software para edição de imagens bitmap.
+A ideia não é ser um concorrente direto de softwares existentes como o Photoshop, mas algo bem mais simples. O foco principal 
+está em desenvolver uma usabilidade adequada para artistas sem grande familiaridade com tecnologia.
+
+Foi decidido que o próximo MVP desse software precisa de uma função de undo, mas por simplicidade não é necessário que também 
+tenha redo. Isso significa que ele precisa de um histórico de comandos, que pode ser simplesmente uma pilha.
+
+Em teoria, não existe um limite claro para a quantidade de comandos que pode ser armazenada nesse histórico. Recomendamos
+permitir mil, pois há registro de pelo menos um caso em que isso foi necessário. Realisticamente, no entanto, sabemos que
+ao longo de um uso típico ele fará apenas algumas dezenas.
+
+O público-alvo é conhecido por tipicamente usar máquinas velhas e com hardware bem modesto. Não é uma boa ideia desperdiçar CPU
+nem memória. Mas, se for necessário escolher entre uma das duas, que seja memória. Afinal, espera-se que undos sejam raros na 
+prática.
+
+Qual implementação de pilha é mais adequada para esse contexto?
+
+
+RespostaEu:
+
+Como pelo contexto recomenda-se considerar que o limite para a quantidade de comandos que pode ser armazenada
+no histórico é 1000, vamos considerar a tabela de recomendação de memória na prática. Além disso, como
+ao longo de um uso típico apenas algumas dezenas de comandos serão armazenados na pilha, vamos considerar as recomendações
+para o caso em que o tamanho médio será distante do tamanho máximo. E, como o público-alvo utiliza hardwares modestos e foi 
+exigido que a memória não seja desperdiçada a todo custo, a melhor opção nesse sentido é a lista ligada.
+
+Embora ela seja a pior em relação ao tempo na prática - velocidade, o contexto deixou claro que se for para escolher entre 
+desperdício de CPU ou memória, deveríamos considerar a memória como sendo prioridade.
+
+Além disso, a lista ligada garante segurança contra estouro, apesar desse aspecto não ter sido exigido pelo contexto e não ser
+tão siginificativo, já que conhecemos o tamanho máximo.
+
+
+
+RespostaHashi:
+Como o tamanho máximo é conhecido (mil), podemos usar a tabela de recomendação
+de memória na prática, visto que baixo desperdício foi pedido pelo cliente. Como
+o tamanho médio na prática é muito menor que o máximo (algumas dezenas), a
+implementação mais recomendada é a LISTA LIGADA.
+
+Ela também oferece segurança contra estouro, embora isso não seja relevante
+visto que o tamanho máximo é conhecido.
+
+Ela é a pior em velocidade, mas o cliente pediu para priorizar memória
+em relação a CPU.
+
+----------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+Uma ONG especializada em animais abandonados usa intensamente um sistema de localização de abrigos próximos. Esse sistema 
+é baseado em um algoritmo de busca em largura, que por sua vez é baseado em uma fila. O algoritmo basicamente varre um tipo 
+especial de mapa para identificar os abrigos mais próximos da localização do animal.
+
+Como a organização não possui muito dinheiro, seus equipamentos atuais são antigos e obsoletos. Isso significa que um conjunto 
+de operações da fila precisa ser tão rápido quanto possível para compensar.
+
+Os equipamentos também não possuem muita capacidade de armazenamento de memória. Isso significa que manter permanentemente 
+alocada alguma estrutura proporcional ao tamanho do mapa não é viável, pois ele pode ser muito grande. É necessário que a busca 
+use memória apenas sob demanda.
+
+Qual implementação de fila é mais adequada para esse contexto?
+
+RespostaEu:
+
+Como foi dito pelo contexto que não é viável manter permanentemente alocada alguma estrutura proporcional ao tamanho do
+mapa, sendo exigida que a busca de memória seja feita sob demanda, temos duas opções: ou o vetor dinâmico ou a lista ligada.
+
+Como a organização não possui muito dinheiro e seus equipamentos são antigos, as operações da fila precisam ser tão rápidas quanto
+possível. Nesse caso, iremos considerar a tabela de recomendação de tempo na prática. Nessa tabela, a implementação mais rápida
+é feita com o vetor estático. Mas como a recomendação de memória restringiu entre lista ligada ou vetor dinâmico, nesse caso,
+o mais rápido é o vetor dinâmico. 
+
+
+Como o sistema é utilizado para varrer dados, o vetor dinâmico é mais rápido para essa operação. Assim, como sua memória
+é feita sob demanda. Dessa forma, a melhor implementação seria feita com o VETOR DINÂMICO.
+
+Ele também garante segurança contra estouro, embora isso não tenha sido exigido.
+
+
+RespostaHashi:
+
+Como manter permanentemente alocada alguma estrutura proporcional ao
+tamanho do mapa não é viável, não podemos usar o VETOR ESTÁTICO.
+
+Dentre as duas opções restantes, a tabela de recomendação de tempo
+na prática indica o VETOR DINÂMICO.
+
+Ela também oferece segurança contra estouro, embora isso não seja relevante
+visto que o tamanho máximo é conhecido.
+
+Ela não é a melhor em relação a memória, mas o cliente não fez uma
+exigência em relação a isso, salvo a de não ser proporcional ao
+tamanho do mapa permanentemente. E essa específica o dinâmico satisfaz.
+
+--------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
+
+Um analisador gramatical precisa ser frequentemente executado para verificar se as expressões matemáticas em um texto científico 
+estão bem-formadas. Você não precisa saber os detalhes desse analisador, mas é interessante saber que ele é baseado em inserir e 
+remover caracteres de uma pilha.
+
+O sistema ao qual esse analisador está integrado exige velocidade, mas possui grandes restrições de memória. É muito importante 
+evitar desperdício. Isso é particularmente relevante porque, ao longo de uma execução do analisador, é muito raro que a altura 
+real da pilha chegue perto da maior altura possível (tamanho total do texto).
+
+Qual implementação de pilha é mais adequada para esse contexto?
+
+
+RespostaEu:
+
+Como o sistema do analisador gramatical ṕossui grandes restrições de memória e é exigido que seja evitado desperdício, sendo que,
+a maior altura possível da pilha é o tamanho total do texto que é conhecido, vamos considerar a recomendação de memória na
+prática. Além disso, como é raro que a altura real da pilha chegue perto da maior altura possível, vamos considerar o 
+tamnho médio distante do tamanho máximo, e, para isso a melhor opção é a lista ligada.
+
+Entretanto, o sistema também exige velocidade, logo, temos que considerar também a recomendação de tempo na prática. E para esse caso,
+o vetor estático é o melhor.
+
+Todavia, vale citar que tanto para a velocidade, quanto para memória, temos que o vetor dinâmico apresenta um desempenho mediano
+em ambos, não sendo nem o melhor e nem o pior. 
+
+Porém, como no contexto não foi priorizado nenhuma das opções, nem dito que pode ser escolhido uma opção mediana para as duas
+condições analisadas e nem apresentado nenhum outro critério de desempate, não há uma resposta para o problema. Para responder,
+mais informações seriam necessárias. 
+
+Se a memória for a prioridade, deve ser escolhida a LISTA LIGADA. Se a velocidade for a prioridade, deve ser escolhido o VETOR ESTÁTICO.
+Se for importante que nenhum dos dois critérios sejam excessivamente ruins, o VETOR DINÂMICO deve ser escolhido.
+
+
+RespostaHashi:
+
+Como o tamanho máximo é conhecido (tamanho total do texto), podemos usar a
+tabela de recomendação de memória na prática, visto que baixo desperdício foi
+pedido pelo cliente. Como o tamanho médio na prática não é próximo do tamanho
+máximo possível, essa tabela indica a LISTA LIGADA.
+
+No entanto, o cliente também exige velocidade. E, na tabela de recomendação
+de tempo na prática, a indicação é o VETOR ESTÁTICO.
+
+Em ambas as tabelas, o VETOR DINÂMICO é uma opção meio termo, nem pior
+e nem melhor.
+
+A escolha, portanto, depende de mais informações. Se velocidade for
+prioritária, devemos escolher o VETOR ESTÁTICO. Se memória for
+prioritária, devemos escolher a LISTA LIGADA. Se for importante
+que nem memória e nem velocidade sejam excessivamente ruins,
+devemos escolher o VETOR DINÂMICO.
+
+-----------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------

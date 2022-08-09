@@ -1,0 +1,146 @@
+{4, 5, 2, 3, 1} vai até 3!
+
+
+{4, 2, 3, 1, 5}
+
+{2, 3, 1, 4, 5}
+
+{2, 1, 3, 4, 5}
+
+{1, 2, 3, 4, 5}
+
+{1, 2, 3, 4, 5}
+
+
+void troca(int v[], int i, int i_prox){
+	int temp = v[i];
+	v[i] = v[i_prox];
+	v[i_prox] = temp;
+}
+
+
+Sempre vai conferindo se o próximo é maior que o anterior e vai trocando. 
+
+void bubble_sort(int v[], int n){
+	for (int i = n-1; n > 0; i--){
+		int trocou = 0;
+		for (int j = 0; j < i; j ++){
+			if (v[j] > v [j+1]){
+				troca(v, j, j+1);
+				trocou = 1;
+			}
+		}
+		
+		if (!trocou){
+			break;
+		}
+	}
+}
+
+-------------------------------------------------------------
+
+Sempre vai conferindo se o valor que está no indíce de alguém é menor do que v[m]. Se for, troca o índice e depois no final vai trocar os dois
+valores colocando o menor no índice 0 e assim por diante.  
+
+void selection_sort(int v[], int n){
+	for (int i = 0; i < n-1; i++){
+		int m = i;
+		for (int j = i+1; j < n; j++){
+			if (v[m] > v[j]){
+				m = j;
+			}
+		}
+		
+		if (m != i){
+			troca(v, m, i);
+		}
+	
+	}
+
+}
+
+-------------------------------------------------------------------
+
+Começa e fixa o primeiro elemento e vai pegando a partir do segundo e colocando no temp. Daí vai comparando o temp com esses elementos fixados.
+Se o temp for menor que o elemento vai shiftando até o momento que o temp for maior e enfia ali no meio. 
+
+void insertion_sort(int v[], int n) {
+    for (int i = 1; i < n; i++) {
+        int temp = v[i];
+        for(int j = i; j > 0 && v[j - 1] > temp; j--) {
+            v[j] = v[j - 1];
+        }
+        v[j] = temp;
+    }
+}
+
+----------------------------------------------------------------------
+
+FAKE QUIZ
+
+SIMULAR PARA BUBBLE, SELECTION E INSERTION
+
+int v[] = {2, 6, 4, 5, 3};
+
+BUBBLE:
+
+{2, 4, 5, 3, 6}
+{2, 4, 3, 5, 6}
+{2, 3, 4, 5, 6}
+{2, 3, 4, 5, 6}
+
+
+SELECTION:
+{2, 6, 4, 5, 3}
+{2, 3, 4, 5, 6}
+{2, 3, 4, 5, 6}
+{2, 3, 4, 5, 6}
+
+INSERTION:
+{2, 6, 4, 5, 3}
+{2, 4, 6, 5, 3}
+{2, 4, 5, 6, 3}
+{2, 3, 4, 5, 6}
+
+-------------------------------------------------------------------------
+
+int v[] = {2, 4, 6, 0, 8}
+
+BUBBLE:
+
+{2, 4, 0, 6, 8}
+{2, 0, 4, 6, 8}
+{0, 2, 4, 6, 8}
+{0, 2, 4, 6, 8}
+
+SELECTION:
+
+{0, 4, 6, 2, 8}
+{0, 2, 6, 4, 8}
+{0, 2, 4, 6, 8}
+{0, 2, 4, 6, 8}
+
+INSERTION:
+
+{2, 4, 6, 0, 8}
+{2, 4, 6, 0, 8}
+{0, 2, 4, 6, 8}
+{0, 2, 4, 6, 8}
+
+--------------------------------------------------------------------
+
+Merge sort : divide o vetor em duas partes e vai avançando em i ou j conforme for comparando as cartas do baralho.
+Se estourar em algum lado, copia o último termo do outro lado. 
+
+
+
+
+
+
+
+
+
+
+
+
+

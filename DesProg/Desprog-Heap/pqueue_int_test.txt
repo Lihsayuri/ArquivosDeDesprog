@@ -1,0 +1,4 @@
+new(2)
+insert(1)
+remove()
+REMOVED 0 BUT EXPECTED 1

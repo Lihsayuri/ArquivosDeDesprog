@@ -1,0 +1,113 @@
+Resposta 1
+----------
+
+Saída para rue(12345):
+
+12345 {
+    1234 {
+        123 {
+            12 {
+                b: 1
+            } 2
+        } 3
+    } 4
+} 5
+
+Resposta 2
+----------
+
+Saída para jules(1):
+
+1 {
+    2 {
+        3 {
+            b: 4
+            b: 4
+        } 8
+        3 {
+            b: 4
+            b: 4
+        } 8
+    } 16
+    2 {
+        3 {
+            b: 4
+            b: 4
+        } 8
+        3 {
+            b: 4
+            b: 4
+        } 8
+    } 16
+} 32
+
+
+Resposta 3
+----------
+
+Saída para fezco(8):
+
+8 {
+    4 {
+        2 {
+            b: 1
+            b: 0
+        } 1
+        b: 1
+    } 2
+    2 {
+        b: 1
+        b: 0
+    } 1
+} 3
+
+
+Resposta 4
+----------
+
+int div(int a, int b) {
+    if (a == 0){
+        return 0;
+    }
+    if (a == 1 && a < b){
+        return 0;
+    }
+
+    return div(a-b, b) + 1;
+}
+
+
+Resposta 5
+----------
+
+int qtd_pares(int v[], int l, int r) {
+    if (l == r){
+        return (v[l] % 2 == 0);
+    }
+
+    return qtd_pares(v, l, r-1) + (v[r] % 2 == 0);
+}
+
+
+
+Resposta 6
+----------
+
+void clip(int v[], int n, int l) {
+    if (n == 0){
+        return;
+    }
+
+    if (v[n-1] > 0){
+        if(v[n-1] > l){
+            v[n-1] = l;
+        }
+    } if (v[n-1] < 0){
+        if (v[n-1] < -l){
+            v[n-1] = -l;
+        }
+    }
+
+    clip(v, n-1, l);
+
+}

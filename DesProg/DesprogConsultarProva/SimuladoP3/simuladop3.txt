@@ -1,0 +1,202 @@
+SIMULADO
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+QUESTÃO 1) Simulação de PILHA com VETOR:
+
+O TOPO DA PILHA É MAIS A DIREITA
+
+depois de new(3)  : ? ? ? 
+depois de push(6) : 6 ? ?
+depois de pop()   : ? ? ?
+depois de push(2) : 2 ? ?
+depois de pop()   : ? ? ? 
+depois de push(5) : 5 ? ? 
+depois de push(3) : 5 3 ?
+depois de push(4) : 5 3 4
+depois de pop()   : 5 3 ?
+
+Simulação de FILA com VETOR:
+
+// O ID DA FILA VAI ANDANDO PQ ELA É CIRCULAR, LEMBRA??? 
+depois de new(3) : ? ? ?
+depois de put(6) : 6 ? ?
+depois de get()  : ? ? ? 
+depois de put(2) : ? 2 ? 
+depois de get()  : ? ? ? 
+depois de put(5) : ? ? 5 
+depois de put(3) : 3 ? 5 
+depois de put(4) : 3 4 5
+depois de get()  : 3 4 ?
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+QUESTÃO 2) Simulação de PILHA com LISTA LIGADA:
+
+depois de new()   :
+depois de push(6) :
+depois de pop()   :
+depois de push(2) :
+depois de pop()   :
+depois de push(5) :
+depois de push(3) :
+depois de push(4) :
+depois de pop()   :
+
+Simulação de FILA com LISTA LIGADA:
+
+depois de new()   :
+depois de put(6)  :
+depois de get()   :
+depois de put(2)  :
+depois de get()   :
+depois de put(5)  :
+depois de put(3)  :
+depois de put(4)  :
+depois de get()   :
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+O servidor de um jogo MMO precisa constantemente ordenar todos os times em ordem decrescente de pontuação, para que todos possam 
+acompanhar a evolução dos rankings em tempo real.
+
+Mesmo com milhares de times, é importante que essas ordenações sejam tão rápidas quando possível, pois o público tem uma rejeição 
+muito grande a qualquer tipo de lag.
+
+Há, no entanto, duas vantagens que talvez possam ser aproveitadas: há muita memória disponível no servidor, quanto for necessário, 
+e não há variações bruscas de pontuação, ou seja, uma ordem é, na prática, muito parecida com a anterior.
+
+Qual algoritmo de ordenação é mais adequado para esse contexto?
+
+RespostaEu:
+
+Como há milhares de times, vamos considerar situações para vetores grande. E como a ordenação precisa ser mais rápida quanto 
+possível, vamos considerar a tabela de recomendação para vetores grande na prática. Como o servidor de um jogo MMO precisa constantemente 
+ordenar todos os times em ordem descrente e não há variações bruscas de  pontuação, sendo que sua ordem na prática é muito parecida
+com a anterior, podemos inverter a pontuação para ser crescente, ordená-la e depois invertê-la de novo, logo, consideraremos 
+a situação para quando os vetores são quase ou totalmente crescentes. Para essa situação, o INSERTION SORT seria o melhor. 
+
+Além disso, ele tem baixa complexidade de memória adicional e possui estabilidade, embora esses critérios não tenham sido exigidos 
+pelo contexto.
+
+RespostaHashi:
+
+Como velocidade é importante, vamos considerar as tabelas de recomendação
+de tempo na prática. Em particular, como há milhares de times, vamos
+considerar a tabela para vetores grandes.
+
+Como o objetivo é ordenar em ordem decrescente, podemos inverter o vetor,
+ordenar e inverter de volta. Considerando esse procedimento, como não há
+variações bruscas de pontuação, podemos considerar a coluna relativa
+a vetores quase ou totalmente crescentes, que indica o INSERTION SORT.
+
+Esse algoritmo também tem baixa complexidade de memória adicional e
+estabilidade, embora esses critérios não tenham sido exigidos.
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Os engenheiros do Google estão fazendo otimizações para a próxima versão do Android. A ordem de cima foi clara: velocidade, 
+velocidade, velocidade. Mesmo que uma operação seja feita muito raramente, sua implementação deve ser a mais rápida possível. É 
+claro que outros recursos não devem ser negligenciados, mas, entre velocidade e qualquer outro recurso, o mais importante é sempre 
+velocidade.
+
+O foco, no momento, é a implementação do botão back. Como smartphones atuais não possuem nenhum tipo de botão forward, essa 
+implementação pode simplesmente manter uma pilha de activities. Abrir uma nova activity significa dar um push e pressionar o 
+botão de voltar significa dar um pop.
+
+Para reduzir a proliferação de más práticas, o Google também tomou uma atitude radical: forçar desenvolvedores de aplicativos a 
+manter no máximo dez activities nessa pilha. Os desenvolvedores devem entender que, se ultrapassarem esse limite, o funcionamento
+correto do aplicativo não é garantido e ele pode até crashar. A plataforma não tem obrigação de oferecer segurança nesse caso.
+
+Qual implementação de pilha é mais adequada para esse contexto?
+
+RespostaEu:
+
+Como foi deixado claro pelo contexto que a velocidade é um critério extremamente importante iremos considerar a recomendação
+de tempo na prática, assim, dentre as três implemtações, tem-se que o VETOR ESTÁTICO é o mais rápido.
+
+Além disso, como no máximo dez activities podem ser mantidas na pilha, conhecemos o tamanho máximo de nossa estrutura a ser 
+adotada e podemos considerar a recomendação de memória na prática. Nesse caso, também vamos considerar para quando o tamanho médio é
+próximo do tamanho máximo, já que a pilha é pequena, assim, a melhor implementação também seria a do VETOR ESTÁTICO. Entretanto, 
+caso o tamanho médio seja o mais distante do máximo, o vetor estático seria o pior. Mas como isso não foi explicitado pelo contexto,
+vamos priorizar apenas a velocidade.
+
+Ademais, como sabemos o tamanho máximo, isso em teoria garante que não ocorrerá estouros. Mas mesmo se esse limite for ultrapassado, 
+foi dito que a plataforma não tem obrigação de oferecer segurança nesse caso, então não é algo relevante. 
+
+Logo, o VETOR ESTÁTICO seria a opção mais adequada para esse contexto.
+
+
+RespostaHashi:
+
+Como velocidade é importante, vamos considerar a tabela de recomendação
+de tempo na prática, que indica o VETOR ESTÁTICO.
+
+Essa implementação não é a mais recomendada em relação a memória quando
+o tamanho médio é distante do máximo, mas isso não foi exigido.
+
+Ela também não oferece segurança contra estouro de memória, mas foi
+explicitamente estabelecido que essa segurança não é necessária.
+
+
+
+
+
+// -------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Em teoria, não existe um limite claro para a quantidade de comandos que pode ser armazenada nesse histórico. 
+Recomendamos permitir mil, pois há registro de pelo menos um caso em que isso foi necessário. Realisticamente,
+ no entanto, sabemos que ao longo de um uso típico ele fará apenas algumas dezenas.
+
+O público-alvo é conhecido por tipicamente usar máquinas velhas e com hardware bem modesto.
+ Não é uma boa ideia desperdiçar CPU nem memória. Mas, se for necessário escolher entre uma das duas, que seja memória. 
+ Afinal, espera-se que undos sejam raros na prática.
+
+
+
+ **SIMULADO**
+
+ Questão 1:
+
+ PILHA VETOR
+
+depois de: new(3)   ? ? ?
+depois de: push(6)  6 ? ?
+depois de: pop()    ? ? ? 
+depois de: push(2)  2 ? ?
+depois de: pop()    ? ? ?
+depois de: push(5)  5 ? ?
+depois de: push(3)  5 3 ?
+depois de: push(4)  5 3 4
+depois de: pop()    5 3 ?
+
+FILA VETOR
+
+depois de new(3)   ? ? ?
+depois de put(6)   6 ? ?
+depois de get()    ? ? ?
+depois de put(2)   ? 2 ?
+depois de get()    ? ? ?
+depois de put(5)   ? ? 5
+depois de put(3)   3 ? 5
+depois de put(4)   3 4 5
+depois de get()    3 4 ?
+
