@@ -1,0 +1,4 @@
+new(1)
+insert(1)
+remove(1)
+STILL HAS 1 AFTER REMOVING

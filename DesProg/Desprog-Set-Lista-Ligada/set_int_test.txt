@@ -1,0 +1,3 @@
+new(9)
+insert(1)
+DOES NOT HAVE 1 AFTER INSERTING
